@@ -7,7 +7,9 @@
 const portfolioConfig = {
   email: 'harshanaavishka7@gmail.com',
   linkedin: '',
-  github: ''
+  github: '',
+  phone: 'tel:+94705586021',
+  whatsapp: 'https://api.whatsapp.com/send/?phone=94705586021&text&type=phone_number&app_absent=0'
 };
 
 /* Keep all portfolio behaviour safely inside one private function. */
@@ -187,6 +189,7 @@ const portfolioConfig = {
     'Full-Stack Developer',
     'UI/UX Designer',
     'Video Editor',
+    'Graphic Designer',
     'Creative Technologist'
   ];
 
