@@ -4,13 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Portfolio of Avishka Harshana — a full-stack developer and creative technologist working across software, UI/UX, video, and visual design.">
-    <meta name="theme-color" content="#050b18">
+    <meta name="theme-color" content="#f8fbff">
     <title>Avishka Harshana — Full-Stack Developer &amp; Creative</title>
 
     <script>
       (function () {
         const savedTheme = localStorage.getItem('avishka-theme');
-        document.documentElement.classList.toggle('dark', savedTheme ? savedTheme === 'dark' : true);
+
+        // Start with light theme when no theme was previously selected.
+        const useDarkTheme = savedTheme === 'dark';
+
+        document.documentElement.classList.toggle('dark', useDarkTheme);
       })();
     </script>
 
