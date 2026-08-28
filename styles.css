@@ -525,7 +525,7 @@ textarea:focus-visible {
 
 .portrait-column {
   position: relative;
-  min-height: min(680px, 74svh);
+  min-height: min(580px, 64svh);
 }
 
 .portrait-stage {
@@ -616,6 +616,9 @@ textarea:focus-visible {
   filter: drop-shadow(0 24px 40px rgba(0, 8, 24, 0.36));
   user-select: none;
 }
+.tech-photo {
+  animation: badge-float 5s ease-in-out infinite;
+}
 
 .tech-badge {
   position: absolute;
@@ -642,11 +645,14 @@ textarea:focus-visible {
 }
 
 .badge-laravel { top: 19%; left: 0; animation-delay: -1s; }
-.badge-tailwind { top: 32%; right: -2%; animation-delay: -2.6s; }
-.badge-figma { top: 51%; left: -4%; animation-delay: -3.8s; }
-.badge-js { top: 68%; right: -1%; animation-delay: -0.6s; }
+.badge-tailwind { top: 42%; right: -2%; animation-delay: -2.6s; }
+.badge-figma { top: 58%; left: -4%; animation-delay: -3.8s; }
+.badge-js { top: 85%; right: -1%; animation-delay: -0.6s; }
 .badge-php { top: 79%; left: 10%; animation-delay: -2s; }
-.badge-git { top: 7%; right: 12%; animation-delay: -4.4s; }
+.badge-git { top: 2%; left: 50%; animation-delay: -4.4s; }
+.badge-github { top: 20%; right: 10%; animation-delay: -1.2s; }
+.badge-python { top: 38%; left: 5%; animation-delay: -3s; }
+.badge-java { top: 65%; right: 10%; animation-delay: -2.2s; }
 
 .scroll-cue {
   position: absolute;
@@ -2264,9 +2270,12 @@ footer {
   .badge-laravel { top: 24%; left: 0; }
   .badge-tailwind { top: 36%; right: 0; }
   .badge-figma { top: 53%; left: 0; }
-  .badge-js { top: 68%; right: 0; }
+  .badge-js { top: 88%; right: 0; }
   .badge-php { top: 81%; left: 4%; }
-  .badge-git { top: 13%; right: 8%; }
+  .badge-git { top: 1%; right: 40%; }
+  .badge-github { top: 10%; right: 0%; }
+  .badge-python { top: 5%; left: 15%; }
+  .badge-java { top: 55%; right: 10%; }
   .section-space { padding-block: 5.25rem; }
   .section-intro h2 { font-size: clamp(2.4rem, 13vw, 3.5rem); }
   .about-layout { margin-top: 2.25rem; }
