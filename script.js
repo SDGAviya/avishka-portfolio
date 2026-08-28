@@ -5,7 +5,7 @@
   and contact form will start working automatically.
 */
 const portfolioConfig = {
-  email: '',
+  email: 'harshanaavishka7@gmail.com',
   linkedin: '',
   github: ''
 };
@@ -30,80 +30,39 @@ const portfolioConfig = {
     toastTimer = window.setTimeout(() => toast.classList.remove('visible'), 3600);
   };
 
-  /* 1. OPENING TERMINAL SEQUENCE */
-  const intro = query('#intro-screen');
-  const introSkip = query('#intro-skip');
-  const introLineOne = query('#intro-line-one');
-  const introLineTwo = query('#intro-line-two');
-  const introLineThree = query('#intro-line-three');
-  const introTimers = [];
-  let introDismissed = false;
+  /* 1. SIMPLE LOADING SCREEN */
+    const intro = query('#intro-screen');
 
-  const scheduleIntro = (callback, delay) => {
-    const timer = window.setTimeout(callback, delay);
-    introTimers.push(timer);
-    return timer;
-  };
+    /* Hide the loading screen with a smooth fade. */
+    const dismissIntro = () => {
+      if (!intro) return;
 
-  const hasSeenIntro = () => {
-    try {
-      return window.sessionStorage.getItem('avishka-intro-seen') === 'true';
-    } catch (error) {
-      return false;
-    }
-  };
-
-  const rememberIntro = () => {
-    try {
-      window.sessionStorage.setItem('avishka-intro-seen', 'true');
-    } catch (error) {
-      // The portfolio still works when session storage is unavailable.
-    }
-  };
-
-  const dismissIntro = (instant = false) => {
-    if (!intro || introDismissed) return;
-    introDismissed = true;
-    introTimers.forEach((timer) => window.clearTimeout(timer));
-    document.body.classList.remove('intro-active');
-    rememberIntro();
-    if (instant) {
+      document.body.classList.remove('intro-active');
       intro.classList.add('intro-hidden');
-      intro.setAttribute('aria-hidden', 'true');
-      return;
-    }
-    intro.classList.add('intro-hidden');
-    scheduleIntro(() => intro.setAttribute('aria-hidden', 'true'), 550);
-  };
 
-  const runIntro = () => {
-    if (!intro) return;
-    if (reducedMotion || hasSeenIntro()) {
-      dismissIntro(true);
-      return;
-    }
-
-    document.body.classList.add('intro-active');
-    const text = 'initializing avishka.portfolio';
-    let characterIndex = 0;
-
-    const typeNextCharacter = () => {
-      if (introDismissed || !introLineOne) return;
-      introLineOne.textContent = text.slice(0, characterIndex + 1);
-      characterIndex += 1;
-      if (characterIndex < text.length) {
-        scheduleIntro(typeNextCharacter, 38);
-      }
+      window.setTimeout(() => {
+        intro.setAttribute('aria-hidden', 'true');
+      }, 550);
     };
 
-    scheduleIntro(typeNextCharacter, 180);
-    scheduleIntro(() => introLineTwo?.classList.remove('opacity-0'), 1450);
-    scheduleIntro(() => introLineThree?.classList.remove('opacity-0'), 2200);
-    scheduleIntro(() => dismissIntro(), 2900);
-  };
+    /* Show the loader on every page refresh. */
+    const runIntro = () => {
+      if (!intro) return;
 
-  introSkip?.addEventListener('click', () => dismissIntro());
-  runIntro();
+      /* Skip the animation when reduced motion is enabled. */
+      if (reducedMotion) {
+        intro.classList.add('intro-hidden');
+        intro.setAttribute('aria-hidden', 'true');
+        return;
+      }
+
+      document.body.classList.add('intro-active');
+
+      /* This duration matches the CSS loading-line animation. */
+      window.setTimeout(dismissIntro, 2200);
+    };
+
+    runIntro();
 
   /* 2. LIGHT / DARK THEME */
   const themeToggle = query('#theme-toggle');

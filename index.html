@@ -49,18 +49,21 @@
   <body class="overflow-x-hidden bg-slate-50 font-sans text-slate-800 antialiased transition-colors duration-300 dark:bg-ink dark:text-slate-100">
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <!-- INTRO SCREEN: The terminal-style animation shown once per browser session. -->
+    <!-- INTRO SCREEN: Simple logo and animated loading line. -->
     <div id="intro-screen" class="intro-screen" aria-label="Portfolio loading">
-      <button id="intro-skip" class="intro-skip" type="button">Skip <span aria-hidden="true">→</span></button>
       <div class="intro-content">
-        <div class="intro-logo" aria-hidden="true"><span>&lt;</span>AH<span>/&gt;</span></div>
-        <div class="intro-terminal font-mono" aria-live="polite">
-          <p><span>&gt;</span> <span id="intro-line-one"></span><span class="terminal-caret"></span></p>
-          <p id="intro-line-two" class="opacity-0"><span>&gt;</span> Loading development + creativity...</p>
-          <p id="intro-line-three" class="opacity-0 text-sky-300"><span>✓</span> Portfolio ready.</p>
+
+        <!-- Existing logo is unchanged. -->
+        <div class="intro-logo" aria-hidden="true">
+          <span>&lt;</span>AH<span>/&gt;</span>
         </div>
+
+        <!-- Animated loading line. -->
+        <div class="intro-progress" aria-hidden="true">
+          <span></span>
+        </div>
+
       </div>
-      <div class="intro-progress" aria-hidden="true"><span></span></div>
     </div>
 
     <!-- PAGE EFFECTS: Custom desktop cursor and the blue reading-progress line. -->
