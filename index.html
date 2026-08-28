@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio of Avishka Harshana — a full-stack developer and creative technologist working across software, UI/UX, video, and visual design.">
+    <meta name="theme-color" content="#050b18">
+    <title>Avishka Harshana — Full-Stack Developer &amp; Creative</title>
+
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem('avishka-theme');
+        document.documentElement.classList.toggle('dark', savedTheme ? savedTheme === 'dark' : true);
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Outfit is the main geometric sans-serif; JetBrains Mono is only for code-style text. -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              ink: '#050b18',
+              navy: '#0b1730',
+              electric: '#38bdf8',
+              royal: '#2563eb',
+              ice: '#dff6ff'
+            },
+            fontFamily: {
+              sans: ['Outfit', 'ui-sans-serif', 'system-ui'],
+              display: ['Outfit', 'ui-sans-serif', 'system-ui'],
+              mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+            },
+            boxShadow: {
+              glow: '0 0 70px rgba(56, 189, 248, 0.22)'
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+
+  <body class="overflow-x-hidden bg-slate-50 font-sans text-slate-800 antialiased transition-colors duration-300 dark:bg-ink dark:text-slate-100">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <!-- INTRO SCREEN: The terminal-style animation shown once per browser session. -->
+    <div id="intro-screen" class="intro-screen" aria-label="Portfolio loading">
+      <button id="intro-skip" class="intro-skip" type="button">Skip <span aria-hidden="true">→</span></button>
+      <div class="intro-content">
+        <div class="intro-logo" aria-hidden="true"><span>&lt;</span>AH<span>/&gt;</span></div>
+        <div class="intro-terminal font-mono" aria-live="polite">
+          <p><span>&gt;</span> <span id="intro-line-one"></span><span class="terminal-caret"></span></p>
+          <p id="intro-line-two" class="opacity-0"><span>&gt;</span> Loading development + creativity...</p>
+          <p id="intro-line-three" class="opacity-0 text-sky-300"><span>✓</span> Portfolio ready.</p>
+        </div>
+      </div>
+      <div class="intro-progress" aria-hidden="true"><span></span></div>
+    </div>
+
+    <!-- PAGE EFFECTS: Custom desktop cursor and the blue reading-progress line. -->
+    <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
+    <div id="cursor-ring" class="cursor-ring" aria-hidden="true"></div>
+    <div id="scroll-progress" class="fixed inset-x-0 top-0 z-[80] h-0.5 origin-left scale-x-0 bg-gradient-to-r from-blue-700 via-sky-400 to-cyan-300" aria-hidden="true"></div>
+
+    <!-- HEADER: Floating navigation for desktop and mobile screens. -->
+    <header id="site-header" class="fixed inset-x-0 top-4 z-50 transition-all duration-300">
+      <div class="nav-island site-shell">
+        <a href="#home" class="brand-mark" aria-label="Avishka Harshana, home">
+          <span class="brand-bracket">&lt;</span>
+          <span>AH</span>
+          <span class="brand-dot">.</span>
+        </a>
+
+        <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
+          <a class="nav-link" href="#home">Home</a>
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#education">Education</a>
+          <a class="nav-link" href="#skills">Skills</a>
+          <a class="nav-link" href="#projects">Projects</a>
+          <a class="nav-link" href="#creative">Creative</a>
+          <a class="nav-link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <button id="theme-toggle" class="island-button" type="button" aria-label="Switch color theme" aria-pressed="false">
+            <svg id="sun-icon" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            <svg id="moon-icon" class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M20.3 15.6A9 9 0 0 1 8.4 3.7 9 9 0 1 0 20.3 15.6Z"></path>
+            </svg>
+            <span class="hidden sm:inline">Theme</span>
+          </button>
+          <a href="#contact" class="hire-button hidden sm:inline-flex">Hire me</a>
+          <button id="menu-toggle" class="island-button lg:hidden" type="button" aria-label="Open navigation menu" aria-controls="mobile-menu" aria-expanded="false">
+            <svg id="menu-open-icon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+            <svg id="menu-close-icon" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-menu" class="site-shell hidden pt-2 lg:hidden" aria-label="Mobile navigation">
+        <div class="mobile-menu-panel">
+          <a class="mobile-nav-link" href="#home">Home</a>
+          <a class="mobile-nav-link" href="#about">About</a>
+          <a class="mobile-nav-link" href="#education">Education</a>
+          <a class="mobile-nav-link" href="#skills">Skills</a>
+          <a class="mobile-nav-link" href="#projects">Projects</a>
+          <a class="mobile-nav-link" href="#creative">Creative</a>
+          <a class="mobile-nav-link" href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- MAIN PAGE CONTENT -->
+    <main id="main-content">
+      <!-- HERO: Main introduction, action buttons, portrait, and floating skill badges. -->
+      <section id="home" class="hero-section">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-left" aria-hidden="true"></div>
+        <div class="hero-glow hero-glow-right" aria-hidden="true"></div>
+
+        <div class="site-shell relative grid min-h-screen items-center gap-12 pb-16 pt-32 lg:grid-cols-[1.04fr_0.96fr] lg:gap-8 lg:pt-24">
+          <div class="relative z-10 max-w-3xl">
+            <div class="availability-pill reveal">
+              <span class="status-pulse"><i></i></span>
+              Available for internship opportunities
+            </div>
+
+            <p class="hero-eyebrow reveal"><span>&gt;</span> Hi, I'm</p>
+            <h1 class="hero-title reveal">
+              <span>Avishka</span>
+              <span class="hero-name-accent">Harshana</span>
+            </h1>
+
+            <div class="hero-role reveal font-mono">
+              <span class="text-sky-400">$</span>
+              <span id="role-text" aria-live="polite">Full-Stack Developer</span>
+              <span class="role-caret" aria-hidden="true"></span>
+            </div>
+
+            <p class="hero-copy reveal">
+              I build useful software and shape strong visual experiences across web development, UI/UX, video editing, photography, and design.
+            </p>
+
+            <div class="reveal mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#projects" class="primary-button group">
+                View projects
+                <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              </a>
+              <a href="#contact" class="secondary-button">Let's work together</a>
+            </div>
+
+            <div class="reveal mt-7 flex flex-wrap gap-2" aria-label="Professional profiles">
+              <button class="social-button" type="button" data-profile="linkedin" aria-label="LinkedIn">in</button>
+              <button class="social-button" type="button" data-profile="github" aria-label="GitHub">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7A11.5 11.5 0 0 0 8.36 23c.58.1.79-.25.79-.56v-2.23c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.58-.29-5.29-1.29-5.29-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.98 10.98 0 0 1 5.75 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.72 5.39-5.31 5.68.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"></path></svg>
+              </button>
+              <button class="social-button" type="button" data-profile="email" aria-label="Email">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v14H4z"></path><path d="m4 7 8 6 8-6"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="portrait-column reveal">
+            <div class="portrait-stage">
+              <div class="portrait-orbit orbit-one" aria-hidden="true"></div>
+              <div class="portrait-orbit orbit-two" aria-hidden="true"></div>
+              <div class="portrait-halo" aria-hidden="true"></div>
+              <div class="portrait-platform" aria-hidden="true"></div>
+              <img src="./assets/avishka-portrait.webp" alt="Avishka Harshana wearing a professional black suit" class="portrait-image">
+
+              <span class="tech-badge badge-laravel"><b>◆</b> Laravel</span>
+              <span class="tech-badge badge-tailwind"><b>◈</b> Tailwind</span>
+              <span class="tech-badge badge-figma"><b>✦</b> Figma</span>
+              <span class="tech-badge badge-js"><b>JS</b> JavaScript</span>
+              <span class="tech-badge badge-php"><b>PHP</b></span>
+              <span class="tech-badge badge-git"><b>⌁</b> Git</span>
+            </div>
+          </div>
+
+          <a href="#about" class="scroll-cue" aria-label="Scroll to about section"><span></span>Scroll</a>
+        </div>
+      </section>
+
+      <!-- ABOUT: Profile card, personal story, career objective, and interests. -->
+      <section id="about" class="section-space about-section">
+        <div class="site-shell">
+          <div class="section-intro reveal">
+            <p class="section-kicker">Who I am</p>
+            <h2>About <span class="text-gradient">me</span></h2>
+            <p class="section-description">A driven software engineer with a love for clean architecture and delightful interfaces.</p>
+          </div>
+
+          <div class="about-layout">
+            <!-- PROFILE CARD: Edit these values when your personal details change. -->
+            <article class="about-profile-card reveal">
+              <div class="about-profile-top">
+                <div class="about-avatar" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="8" r="3.25"></circle>
+                    <path d="M5.5 19c.55-3.55 2.72-5.35 6.5-5.35s5.95 1.8 6.5 5.35"></path>
+                  </svg>
+                </div>
+                <h3>Avishka Harshana</h3>
+                <p>Software Engineering Undergraduate</p>
+              </div>
+
+              <div class="about-profile-details">
+                <div class="profile-detail-row">
+                  <span class="profile-detail-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.25"></circle></svg>
+                  </span>
+                  <div><small>Location</small><strong>Sri Lanka</strong></div>
+                </div>
+
+                <div class="profile-detail-row">
+                  <span class="profile-detail-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m3 9 9-5 9 5-9 5-9-5Z"></path><path d="M7 12v5c2.8 2 7.2 2 10 0v-5M21 9v6"></path></svg>
+                  </span>
+                  <div><small>Education</small><strong>HND in Software Engineering — NIBM</strong></div>
+                </div>
+
+                <div class="profile-detail-row">
+                  <span class="profile-detail-icon profile-detail-text" aria-hidden="true">A</span>
+                  <div><small>Languages</small><strong>Sinhala, English</strong></div>
+                </div>
+
+                <div class="profile-detail-row">
+                  <span class="profile-detail-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V4h6v3M3 12h18M10 12v2h4v-2"></path></svg>
+                  </span>
+                  <div><small>Status</small><strong class="profile-status">Open to Internship Opportunities</strong></div>
+                </div>
+
+                <div class="profile-detail-row">
+                  <span class="profile-detail-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m4 7 8 6 8-6"></path></svg>
+                  </span>
+                  <div><small>Email</small><a id="about-email" href="#contact">Via contact form</a></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- ABOUT STORY: Main biography and the career direction card. -->
+            <div class="about-story reveal">
+              <div class="about-story-copy">
+                <p>
+                  I'm Avishka Harshana, a dedicated Software Engineering undergraduate at the National Institute of Business Management (NIBM), Sri Lanka. My journey in technology started with curiosity and has grown into a deep passion for building meaningful software.
+                </p>
+                <p>
+                  I thrive at the intersection of engineering and design—writing clean, maintainable code while crafting interfaces that feel natural and intuitive. Whether it is a full-stack Laravel application, a C# desktop system, or a Python project, I approach every build with the same commitment to quality.
+                </p>
+              </div>
+
+              <!-- CAREER OBJECTIVE: Keep this short and focused for recruiters. -->
+              <article class="career-objective">
+                <p class="card-eyebrow">Career objective</p>
+                <p>To secure a challenging software engineering internship or entry-level role where I can apply my technical and creative skills, contribute to impactful projects, and continuously grow as a developer.</p>
+              </article>
+
+              <!-- INTEREST CHIPS: Add or remove a chip without changing JavaScript. -->
+              <div class="about-interests">
+                <h3>Interests &amp; passions</h3>
+                <div class="interest-list">
+                  <span><b aria-hidden="true">&lt;/&gt;</b> Full-Stack Development</span>
+                  <span><b aria-hidden="true">PHP</b> Laravel Development</span>
+                  <span><b aria-hidden="true">DB</b> Database Design</span>
+                  <span><b aria-hidden="true">UI</b> UI/UX Design</span>
+                  <span><b aria-hidden="true">▶</b> Video Editing</span>
+                  <span><b aria-hidden="true">◉</b> Photography</span>
+                  <span><b aria-hidden="true">✦</b> Graphic Design</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION: Timeline-style academic background inspired by the supplied reference. -->
+      <section id="education" class="section-space education-section">
+        <div class="site-shell">
+          <div class="section-intro education-intro reveal">
+            <p class="section-kicker">Academic background</p>
+            <h2>My <span class="text-gradient">education</span></h2>
+            <p class="section-description">Building a strong foundation in software engineering principles and practice.</p>
+          </div>
+
+          <!-- EDUCATION TIMELINE: Copy an education-entry article to add another qualification. -->
+          <div class="education-timeline">
+            <article class="education-entry reveal">
+              <span class="education-marker" aria-hidden="true"><i></i></span>
+              <p class="education-date"><time datetime="2023">2023</time> — Present</p>
+
+              <div class="education-card">
+                <h3>Higher National Diploma in Software Engineering</h3>
+                <div class="education-level" aria-label="Qualification level">
+                  <span>HND</span>
+                  <i aria-hidden="true"></i>
+                  <span>Level 5</span>
+                </div>
+
+                <p class="education-institute">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5-9-5Z"></path><path d="M7 12v5c2.8 2 7.2 2 10 0v-5M21 9v6"></path></svg>
+                  National Institute of Business Management (NIBM), Sri Lanka
+                </p>
+
+                <p class="education-description">Advanced study of software engineering covering system analysis, object-oriented design, enterprise application development, database management, and software project management.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS: Buttons filter cards using the matching data-skill-* values. -->
+      <section id="skills" class="section-space section-tint">
+        <div class="site-shell">
+          <div class="section-intro reveal">
+            <p class="section-kicker">What I know</p>
+            <h2>Technical &amp; creative <span class="text-gradient">skills</span></h2>
+            <p class="section-description">A flexible toolkit for building software and communicating ideas visually.</p>
+          </div>
+
+          <div class="filter-bar reveal" role="tablist" aria-label="Skill categories">
+            <button class="filter-button active" type="button" data-skill-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="filter-button" type="button" data-skill-filter="frontend" role="tab" aria-selected="false">Frontend</button>
+            <button class="filter-button" type="button" data-skill-filter="backend" role="tab" aria-selected="false">Backend</button>
+            <button class="filter-button" type="button" data-skill-filter="language" role="tab" aria-selected="false">Languages</button>
+            <button class="filter-button" type="button" data-skill-filter="database" role="tab" aria-selected="false">Database</button>
+            <button class="filter-button" type="button" data-skill-filter="creative" role="tab" aria-selected="false">Creative</button>
+            <button class="filter-button" type="button" data-skill-filter="tools" role="tab" aria-selected="false">Tools</button>
+          </div>
+
+          <div id="skill-grid" class="skill-grid">
+            <article class="skill-card reveal" data-skill-category="frontend"><span class="skill-icon">H5</span><div><h3>HTML5</h3><p>Semantic web structure</p></div></article>
+            <article class="skill-card reveal" data-skill-category="frontend"><span class="skill-icon">TW</span><div><h3>Tailwind CSS</h3><p>Responsive interface styling</p></div></article>
+            <article class="skill-card reveal" data-skill-category="frontend language"><span class="skill-icon">JS</span><div><h3>JavaScript</h3><p>Interactive web experiences</p></div></article>
+            <article class="skill-card reveal" data-skill-category="backend language"><span class="skill-icon">PHP</span><div><h3>PHP</h3><p>Server-side development</p></div></article>
+            <article class="skill-card reveal" data-skill-category="backend"><span class="skill-icon">Lv</span><div><h3>Laravel</h3><p>Full-stack web applications</p></div></article>
+            <article class="skill-card reveal" data-skill-category="backend language"><span class="skill-icon">Py</span><div><h3>Python &amp; Flask</h3><p>Applications and APIs</p></div></article>
+            <article class="skill-card reveal" data-skill-category="language"><span class="skill-icon">Jv</span><div><h3>Java</h3><p>Object-oriented programming</p></div></article>
+            <article class="skill-card reveal" data-skill-category="language"><span class="skill-icon">C#</span><div><h3>C#</h3><p>Windows desktop systems</p></div></article>
+            <article class="skill-card reveal" data-skill-category="database"><span class="skill-icon">DB</span><div><h3>MySQL</h3><p>Relational data design</p></div></article>
+            <article class="skill-card reveal" data-skill-category="creative tools"><span class="skill-icon">Fg</span><div><h3>Figma</h3><p>UI/UX and prototyping</p></div></article>
+            <article class="skill-card reveal" data-skill-category="creative"><span class="skill-icon">Vx</span><div><h3>Video Editing</h3><p>Story, rhythm, and motion</p></div></article>
+            <article class="skill-card reveal" data-skill-category="creative"><span class="skill-icon">Ph</span><div><h3>Photography</h3><p>Composition and visual mood</p></div></article>
+            <article class="skill-card reveal" data-skill-category="creative"><span class="skill-icon">Gd</span><div><h3>Graphic Design</h3><p>Brand and social visuals</p></div></article>
+            <article class="skill-card reveal" data-skill-category="tools"><span class="skill-icon">Git</span><div><h3>Git &amp; GitHub</h3><p>Version control workflow</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS: Featured cards, filters, hover actions, and a reusable details dialog. -->
+      <section id="projects" class="section-space projects-section">
+        <div class="site-shell">
+          <div class="section-intro reveal">
+            <p class="section-kicker">What I've built</p>
+            <h2>Featured <span class="text-gradient">projects</span></h2>
+            <p class="section-description">A selection of real-world systems built with care and engineered to solve genuine problems.</p>
+          </div>
+
+          <!-- FILTERS: Each value must match a card's data-project-category below. -->
+          <div class="filter-bar project-filter-bar reveal" role="tablist" aria-label="Project categories">
+            <button class="filter-button active" type="button" data-project-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="filter-button" type="button" data-project-filter="web" role="tab" aria-selected="false">Web Apps</button>
+            <button class="filter-button" type="button" data-project-filter="system" role="tab" aria-selected="false">Desktop Systems</button>
+            <button class="filter-button" type="button" data-project-filter="logic" role="tab" aria-selected="false">Logic Design</button>
+          </div>
+
+          <div class="project-grid">
+            <!-- PROJECT CARD: Copy this article to add another project.
+                 Paste real URLs into data-project-github and data-project-demo when available. -->
+            <article
+              class="project-card reveal"
+              data-project-category="web"
+              data-project-github=""
+              data-project-demo=""
+              data-project-description="A responsive e-commerce platform for smart gadgets with product discovery, cart management, and a practical checkout workflow. The project focuses on clear navigation, reusable interface patterns, and dependable data handling across a complete online shopping experience."
+            >
+              <div class="project-visual visual-market">
+                <svg class="project-symbol" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                  <path d="M14 22h36l-3 31H17l-3-31Z"></path><path d="M23 25v-7a9 9 0 0 1 18 0v7"></path><path d="M24 35h16M24 43h10"></path>
+                </svg>
+                <div class="project-overlay">
+                  <button class="project-action project-action-primary" type="button" data-project-details>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+                    View details
+                  </button>
+                  <!-- Replace this disabled button with a GitHub link when the repository is public. -->
+                  <button class="project-action project-action-secondary" type="button" disabled title="GitHub link coming soon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7A11.5 11.5 0 0 0 8.36 23c.58.1.79-.25.79-.56v-2.23c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.58-.29-5.29-1.29-5.29-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.98 10.98 0 0 1 5.75 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.72 5.39-5.31 5.68.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"></path></svg>
+                    GitHub
+                  </button>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta"><p class="card-eyebrow">E-commerce</p><span>Web application</span></div>
+                <h3>Smart Gadget Marketplace</h3>
+                <p>A responsive e-commerce platform for smart gadgets with product discovery, cart management, and a practical checkout flow.</p>
+                <div class="tag-row"><span>Laravel</span><span>MySQL</span><span>Tailwind</span><span>Alpine.js</span></div>
+              </div>
+            </article>
+
+            <article
+              class="project-card reveal"
+              data-project-category="system"
+              data-project-github=""
+              data-project-demo=""
+              data-project-description="A Windows desktop application for managing hotel customers, rooms, reservations, and booking records. It brings the main reception tasks into one clear workflow and uses structured database operations to keep everyday hotel information organized."
+            >
+              <div class="project-visual visual-hotel">
+                <svg class="project-symbol" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                  <path d="M13 55V12h38v43M8 55h48"></path><path d="M22 21h7v7h-7zM36 21h7v7h-7zM22 34h7v7h-7zM36 34h7v7h-7zM28 55V46h8v9"></path>
+                </svg>
+                <div class="project-overlay">
+                  <button class="project-action project-action-primary" type="button" data-project-details>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+                    View details
+                  </button>
+                  <button class="project-action project-action-secondary" type="button" disabled title="GitHub link coming soon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7A11.5 11.5 0 0 0 8.36 23c.58.1.79-.25.79-.56v-2.23c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.58-.29-5.29-1.29-5.29-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.98 10.98 0 0 1 5.75 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.72 5.39-5.31 5.68.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"></path></svg>
+                    GitHub
+                  </button>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta"><p class="card-eyebrow">Booking management</p><span>Desktop system</span></div>
+                <h3>Hotel Booking Management</h3>
+                <p>A Windows application for managing customers, rooms, reservations, and hotel records.</p>
+                <div class="tag-row"><span>C#</span><span>WinForms</span><span>MySQL</span></div>
+              </div>
+            </article>
+
+            <article
+              class="project-card reveal"
+              data-project-category="web"
+              data-project-github=""
+              data-project-demo=""
+              data-project-description="A Flask-based restaurant management application designed to support essential restaurant operations through a clear and practical workflow. It combines a lightweight Python backend with structured data handling and a straightforward interface."
+            >
+              <div class="project-visual visual-restaurant">
+                <svg class="project-symbol" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                  <circle cx="34" cy="33" r="17"></circle><circle cx="34" cy="33" r="10" opacity=".45"></circle><path d="M10 9v18M16 9v18M10 18h6M13 27v28M55 9v46M55 9c-6 5-6 15 0 18"></path>
+                </svg>
+                <div class="project-overlay">
+                  <button class="project-action project-action-primary" type="button" data-project-details>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+                    View details
+                  </button>
+                  <button class="project-action project-action-secondary" type="button" disabled title="GitHub link coming soon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7A11.5 11.5 0 0 0 8.36 23c.58.1.79-.25.79-.56v-2.23c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.58-.29-5.29-1.29-5.29-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.98 10.98 0 0 1 5.75 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.72 5.39-5.31 5.68.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"></path></svg>
+                    GitHub
+                  </button>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta"><p class="card-eyebrow">Management system</p><span>Web application</span></div>
+                <h3>Restaurant Management System</h3>
+                <p>A Flask-based application designed to support restaurant operations with a clear, practical workflow.</p>
+                <div class="tag-row"><span>Python</span><span>Flask</span><span>Database Design</span></div>
+              </div>
+            </article>
+
+            <article
+              class="project-card reveal"
+              data-project-category="logic"
+              data-project-github=""
+              data-project-demo=""
+              data-project-description="A digital logic solution for managing airport parking availability using truth tables, Boolean expressions, logic gates, circuit design, and K-map simplification. The project demonstrates how a real process can be represented as a reliable combinational logic system."
+            >
+              <div class="project-visual visual-parking">
+                <svg class="project-symbol" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                  <rect x="11" y="8" width="42" height="48" rx="5"></rect><path d="M25 47V18h10a10 10 0 0 1 0 20H25M25 27h10"></path>
+                </svg>
+                <div class="project-overlay">
+                  <button class="project-action project-action-primary" type="button" data-project-details>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+                    View details
+                  </button>
+                  <button class="project-action project-action-secondary" type="button" disabled title="GitHub link coming soon">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7A11.5 11.5 0 0 0 8.36 23c.58.1.79-.25.79-.56v-2.23c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.58-.29-5.29-1.29-5.29-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.98 10.98 0 0 1 5.75 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.72 5.39-5.31 5.68.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"></path></svg>
+                    GitHub
+                  </button>
+                </div>
+              </div>
+              <div class="project-body">
+                <div class="project-meta"><p class="card-eyebrow">Digital logic</p><span>Circuit design</span></div>
+                <h3>Airport Parking Slot System</h3>
+                <p>A logic-gate solution created using truth tables, Boolean expressions, circuit design, and K-maps.</p>
+                <div class="tag-row"><span>Boolean Logic</span><span>Logic Gates</span><span>K-Maps</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- PROJECT DIALOG: JavaScript fills this larger reusable popup from the selected card. -->
+        <dialog id="project-dialog" class="project-dialog" aria-labelledby="project-dialog-title">
+          <div class="project-dialog-card">
+            <header class="project-dialog-header">
+              <h3 id="project-dialog-title">Project details</h3>
+              <form method="dialog" class="project-dialog-close-form">
+                <button class="project-dialog-close" type="submit" aria-label="Close project details">×</button>
+              </form>
+            </header>
+
+            <div class="project-dialog-content">
+              <!-- The selected card's icon and blue background are copied into this preview. -->
+              <div id="project-dialog-media" class="project-dialog-media" role="img" aria-label="Project preview">
+                <div id="project-dialog-symbol" class="project-dialog-symbol" aria-hidden="true"></div>
+              </div>
+
+              <div id="project-dialog-stack" class="tag-row project-dialog-stack"></div>
+              <p id="project-dialog-description" class="project-dialog-description"></p>
+
+              <!-- Empty data URLs on each project keep these links disabled until real URLs are added. -->
+              <div class="project-dialog-actions">
+                <a href="#" id="project-dialog-github" class="project-dialog-action project-dialog-action-secondary" target="_blank" rel="noopener noreferrer" data-project-dialog-link>
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7A11.5 11.5 0 0 0 8.36 23c.58.1.79-.25.79-.56v-2.23c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.58-.29-5.29-1.29-5.29-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.98 10.98 0 0 1 5.75 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.72 5.39-5.31 5.68.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"></path></svg>
+                  View on GitHub
+                </a>
+                <a href="#" id="project-dialog-demo" class="project-dialog-action project-dialog-action-primary" target="_blank" rel="noopener noreferrer" data-project-dialog-link>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"></path><path d="M18 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"></path></svg>
+                  Live Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </dialog>
+      </section>
+
+      <!-- CREATIVE WORK: Highlights design, video, animation, and photography. -->
+      <section id="creative" class="section-space section-tint">
+        <div class="site-shell">
+          <div class="section-intro reveal">
+            <p class="section-kicker">Beyond code</p>
+            <h2>Creative <span class="text-gradient">practice</span></h2>
+            <p class="section-description">The visual side of my work helps products communicate with more clarity, feeling, and personality.</p>
+          </div>
+
+          <div class="creative-grid">
+            <article class="creative-card creative-ui reveal"><span>01</span><div><small>Product thinking</small><h3>UI/UX Design</h3><p>Wireframes, prototypes, responsive systems, and user-centered interface decisions.</p></div></article>
+            <article class="creative-card creative-video reveal"><span>02</span><div><small>Story in motion</small><h3>Video &amp; Animation</h3><p>Editing, transitions, motion graphics, and pacing for digital content.</p></div></article>
+            <article class="creative-card creative-photo reveal"><span>03</span><div><small>Visual language</small><h3>Photo &amp; Graphics</h3><p>Photography, videography, composition, and consistent brand visuals.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT: The form uses the email configured at the top of script.js. -->
+      <section id="contact" class="section-space">
+        <div class="site-shell">
+          <div class="contact-panel reveal">
+            <div class="contact-copy">
+              <p class="section-kicker text-sky-300">Let's build something</p>
+              <h2>Have an opportunity or idea?</h2>
+              <p>I'm open to software engineering internships, collaborative projects, and creative work that brings technology and visual thinking together.</p>
+              <div class="mt-7 flex flex-wrap gap-2">
+                <button class="contact-chip" type="button" data-profile="email">Email</button>
+                <button class="contact-chip" type="button" data-profile="linkedin">LinkedIn</button>
+                <button class="contact-chip" type="button" data-profile="github">GitHub</button>
+              </div>
+            </div>
+
+            <form id="contact-form" class="contact-form" novalidate>
+              <div class="grid gap-4 sm:grid-cols-2">
+                <label class="form-field"><span>Your name</span><input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name" required></label>
+                <label class="form-field"><span>Email address</span><input id="contact-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+              </div>
+              <label class="form-field mt-4"><span>Your message</span><textarea id="contact-message" name="message" rows="5" placeholder="Tell me about the opportunity or project..." required></textarea></label>
+              <button class="contact-submit" type="submit">Create message <span aria-hidden="true">↗</span></button>
+              <p class="mt-3 text-xs leading-5 text-slate-400">Add your contact details in the configuration to activate sending.</p>
+            </form>
+            <div class="contact-orb" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER: Copyright year is inserted automatically by JavaScript. -->
+    <footer>
+      <div class="site-shell flex flex-col gap-4 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:text-slate-400">
+        <div><span class="font-display font-bold text-slate-800 dark:text-white">&lt;AH/&gt;</span><p class="mt-1">Building ideas through code and creativity.</p></div>
+        <p>© <span id="current-year"></span> Avishka Harshana.</p>
+        <a href="#home" class="font-semibold transition hover:text-sky-500">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <!-- TOAST: Small messages for missing profile links or form validation. -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./script.js" defer></script>
+  </body>
+</html>
