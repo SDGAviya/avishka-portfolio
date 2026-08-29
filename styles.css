@@ -5,6 +5,84 @@
   2. Change the dark-theme colors inside .dark.
   3. The remaining rules are grouped by page section below.
 */
+
+/* Previous and next gallery buttons */
+.project-gallery-button {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: grid;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(3, 15, 34, 0.72);
+  color: #ffffff;
+  font-size: 1.65rem;
+  line-height: 1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.project-gallery-prev {
+  left: 0.75rem;
+}
+
+.project-gallery-next {
+  right: 0.75rem;
+}
+
+.project-gallery-button:hover {
+  transform: translateY(-50%) scale(1.08);
+  background: #0284c7;
+}
+
+/* Gallery image counter */
+.project-gallery-counter {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.65rem;
+  z-index: 5;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(3, 15, 34, 0.72);
+  padding: 0.3rem 0.58rem;
+  color: #ffffff;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  backdrop-filter: blur(8px);
+}
+
+/* Properly hide controls for projects with one image. */
+.project-gallery-button[hidden],
+.project-gallery-counter[hidden] {
+  display: none;
+}
+
+/* Featured project screenshot */
+.project-image {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 500ms ease, filter 300ms ease;
+}
+
+/* Slightly zoom and darken the screenshot on hover */
+.project-card:hover .project-image,
+.project-card:focus-within .project-image {
+  transform: scale(1.06);
+  filter: brightness(0.55);
+}
+
+
+
 :root {
   color-scheme: light;
   --page: #f8fbff;
@@ -649,7 +727,7 @@ textarea:focus-visible {
 .badge-figma { top: 58%; left: -4%; animation-delay: -3.8s; }
 .badge-js { top: 85%; right: -1%; animation-delay: -0.6s; }
 .badge-php { top: 79%; left: 10%; animation-delay: -2s; }
-.badge-git { top: 2%; left: 50%; animation-delay: -4.4s; }
+.badge-git { top: 2%; left: 55%; animation-delay: -4.4s; }
 .badge-github { top: 20%; right: 10%; animation-delay: -1.2s; }
 .badge-python { top: 38%; left: 5%; animation-delay: -3s; }
 .badge-java { top: 65%; right: 10%; animation-delay: -2.2s; }
@@ -1733,6 +1811,17 @@ textarea:focus-visible {
   filter: blur(32px);
 }
 
+/* Hide the small square when a screenshot is displayed. */
+.project-dialog-media.has-project-image .project-dialog-symbol {
+  display: none;
+}
+
+/* Remove the blue grid and glow covering the screenshot. */
+.project-dialog-media.has-project-image::before,
+.project-dialog-media.has-project-image::after {
+  display: none;
+}
+
 .project-dialog-symbol {
   position: relative;
   z-index: 1;
@@ -2272,7 +2361,7 @@ footer {
   .badge-figma { top: 53%; left: 0; }
   .badge-js { top: 88%; right: 0; }
   .badge-php { top: 81%; left: 4%; }
-  .badge-git { top: 1%; right: 40%; }
+  .badge-git { top: 1%; right: 50%; }
   .badge-github { top: 10%; right: 0%; }
   .badge-python { top: 5%; left: 15%; }
   .badge-java { top: 55%; right: 10%; }

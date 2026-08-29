@@ -270,7 +270,64 @@ const portfolioConfig = {
   const dialogStack = query('#project-dialog-stack');
   const dialogMedia = query('#project-dialog-media');
   const dialogSymbol = query('#project-dialog-symbol');
+
+  /* Project gallery controls */
+  const galleryPrevious = query('#project-image-prev');
+  const galleryNext = query('#project-image-next');
+  const galleryCounter = query('#project-image-counter');
+
   const dialogGithub = query('#project-dialog-github');
+
+  let projectGalleryImages = [];
+  let projectGalleryIndex = 0;
+
+  /* Display the currently selected gallery image. */
+  const showProjectGalleryImage = () => {
+    const currentImage =
+      projectGalleryImages[projectGalleryIndex] || '';
+
+    const hasImage = Boolean(currentImage);
+    const showNavigation = projectGalleryImages.length > 1;
+
+    if (dialogMedia) {
+      dialogMedia.classList.toggle(
+        'has-project-image',
+        hasImage
+      );
+
+      dialogMedia.style.backgroundImage = hasImage
+        ? `url("${currentImage}")`
+        : '';
+
+      dialogMedia.style.backgroundSize = hasImage
+        ? 'cover'
+        : '';
+
+      dialogMedia.style.backgroundPosition = hasImage
+        ? 'center'
+        : '';
+
+      dialogMedia.style.backgroundRepeat = hasImage
+        ? 'no-repeat'
+        : '';
+    }
+
+    if (galleryPrevious) {
+      galleryPrevious.hidden = !showNavigation;
+    }
+
+    if (galleryNext) {
+      galleryNext.hidden = !showNavigation;
+    }
+
+    if (galleryCounter) {
+      galleryCounter.hidden = !showNavigation;
+
+      galleryCounter.textContent = showNavigation
+        ? `${projectGalleryIndex + 1} / ${projectGalleryImages.length}`
+        : '';
+    }
+  };
   const dialogDemo = query('#project-dialog-demo');
 
   /* Activate an action only when its project card contains a real URL. */
@@ -293,10 +350,36 @@ const portfolioConfig = {
       const description = card.dataset.projectDescription?.trim()
         || query('.project-body > p', card)?.textContent.trim()
         || '';
-      const technologies = queryAll('.tag-row span', card).map((tag) => tag.textContent.trim());
+      const technologies = queryAll('.tag-row span', card).map((tag) =>
+        tag.textContent.trim()
+      );
+
       const cardVisual = query('.project-visual', card);
       const cardSymbol = query('.project-symbol', card);
-      const visualClass = Array.from(cardVisual?.classList || []).find((name) => name.startsWith('visual-'));
+
+      /* Find the screenshot inside the selected project card. */
+      const cardImage = query('.project-image', card);
+      const fallbackImage =
+        cardImage?.getAttribute('src')?.trim() || '';
+
+      /* Read all paths from data-project-images. */
+      const listedImages = (card.dataset.projectImages || '')
+        .split(/[|,]/)
+        .map((image) => image.trim())
+        .filter(Boolean);
+
+      /* Use the card image when no gallery was added. */
+      projectGalleryImages = listedImages.length
+        ? listedImages
+        : fallbackImage
+          ? [fallbackImage]
+          : [];
+
+      projectGalleryIndex = 0;
+
+      const visualClass = Array.from(cardVisual?.classList || []).find(
+        (name) => name.startsWith('visual-')
+      );
 
       if (dialogTitle) dialogTitle.textContent = title;
       if (dialogDescription) dialogDescription.textContent = description;
@@ -304,12 +387,25 @@ const portfolioConfig = {
       /* Reuse the selected project's icon and background inside the large preview. */
       if (dialogMedia) {
         dialogMedia.className = 'project-dialog-media';
-        if (visualClass) dialogMedia.classList.add(visualClass);
-        dialogMedia.setAttribute('aria-label', `${title} preview`);
+
+        if (visualClass) {
+          dialogMedia.classList.add(visualClass);
+        }
+
+        dialogMedia.setAttribute(
+          'aria-label',
+          `${title} preview`
+        );
+
+        /* Start the gallery from its first image. */
+        showProjectGalleryImage();
       }
+
+      /* Show the old SVG icon only when there is no project image. */
       if (dialogSymbol) {
         dialogSymbol.replaceChildren();
-        if (cardSymbol) {
+
+        if (projectGalleryImages.length === 0 && cardSymbol) {
           const symbolCopy = cardSymbol.cloneNode(true);
           symbolCopy.setAttribute('class', 'project-dialog-icon');
           dialogSymbol.append(symbolCopy);
@@ -326,7 +422,7 @@ const portfolioConfig = {
       }
 
       setProjectDialogLink(dialogGithub, card.dataset.projectGithub, 'GitHub link coming soon');
-      setProjectDialogLink(dialogDemo, card.dataset.projectDemo, 'Live demo coming soon');
+      setProjectDialogLink(dialogDemo, card.dataset.projectDemo, 'Live demo not accessible yet');
 
       if (typeof projectDialog.showModal === 'function') {
         projectDialog.showModal();
@@ -335,6 +431,39 @@ const portfolioConfig = {
         projectDialog.setAttribute('open', '');
       }
     });
+  });
+
+  /* Show the previous gallery image. */
+  galleryPrevious?.addEventListener('click', () => {
+    if (projectGalleryImages.length < 2) return;
+
+    projectGalleryIndex =
+      (projectGalleryIndex - 1 + projectGalleryImages.length)
+      % projectGalleryImages.length;
+
+    showProjectGalleryImage();
+  });
+
+  /* Show the next gallery image. */
+  galleryNext?.addEventListener('click', () => {
+    if (projectGalleryImages.length < 2) return;
+
+    projectGalleryIndex =
+      (projectGalleryIndex + 1)
+      % projectGalleryImages.length;
+
+    showProjectGalleryImage();
+  });
+
+  /* Keyboard arrow support. */
+  projectDialog?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') {
+      galleryPrevious?.click();
+    }
+
+    if (event.key === 'ArrowRight') {
+      galleryNext?.click();
+    }
   });
 
   const closeProjectDialog = () => {
