@@ -2378,7 +2378,7 @@ footer {
   .badge-figma { top: 53%; left: 0; }
   .badge-js { top: 88%; right: 0; }
   .badge-php { top: 81%; left: 4%; }
-  .badge-git { top: 1%; right: 50%; }
+  .badge-git { top: 1%; right: 50%;right: auto; }
   .badge-github { top: 10%; right: 0%; }
   .badge-python { top: 5%; left: 15%; }
   .badge-java { top: 55%; right: 10%; }

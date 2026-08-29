@@ -6,8 +6,8 @@
 */
 const portfolioConfig = {
   email: 'harshanaavishka7@gmail.com',
-  linkedin: '',
-  github: '',
+  linkedin: 'https://www.linkedin.com/in/avishka-harshana/',
+  github: 'https://github.com/avishkawijewardhana',
   phone: 'tel:+94705586021',
   whatsapp: 'https://api.whatsapp.com/send/?phone=94705586021&text&type=phone_number&app_absent=0'
 };
