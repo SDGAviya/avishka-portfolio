@@ -459,6 +459,7 @@
           <div class="filter-bar project-filter-bar reveal" role="tablist" aria-label="Project categories">
             <button class="filter-button active" type="button" data-project-filter="all" role="tab" aria-selected="true">All</button>
             <button class="filter-button" type="button" data-project-filter="web" role="tab" aria-selected="false">Web Apps</button>
+            <button class="filter-button" type="button" data-project-filter="mobile" role="tab" aria-selected="false">Mobile App</button>
             <button class="filter-button" type="button" data-project-filter="system" role="tab" aria-selected="false">Desktop Systems</button>
             <button class="filter-button" type="button" data-project-filter="logic" role="tab" aria-selected="false">Robotics</button>
           </div>
@@ -530,31 +531,31 @@
 
             <article
               class="project-card reveal"
-              data-project-category="web"
+              data-project-category="mobile"
               data-project-github=""
               data-project-demo=""
-              data-project-description="A Flask-based restaurant management application designed to support essential restaurant operations through a clear and practical workflow. It combines a lightweight Python backend with structured data handling and a straightforward interface."
+              data-project-description="Developed Smart Vehicle Service Manager, an offline-first Android application designed to help small vehicle service centers manage their daily garage operations efficiently.The application allows users to manage customers and vehicles, capture vehicle photos using CameraX, save garage GPS locations, maintain service histories, schedule future service reminders, and track synchronization status. Room Database allows the application to continue working offline, while Firebase Authentication and Firestore provide secure login and cloud synchronization when an internet connection becomes available."
+              data-project-images="./assets/Smart_Vehicle_Service/01_login.png,./assets/Smart_Vehicle_Service/02_register.png,./assets/Smart_Vehicle_Service/03_customers.png,./assets/Smart_Vehicle_Service/04_add_customer.png,./assets/Smart_Vehicle_Service/05_vehicles.png,./assets/Smart_Vehicle_Service/06_add_vehicle.png,./assets/Smart_Vehicle_Service/07_camera_capture.png,./assets/Smart_Vehicle_Service/08_vehicle_details.png,./assets/Smart_Vehicle_Service/09_add_service.png,./assets/Smart_Vehicle_Service/10_reports.png"
             >
               <div class="project-visual visual-restaurant">
-                <svg class="project-symbol" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
-                  <circle cx="34" cy="33" r="17"></circle><circle cx="34" cy="33" r="10" opacity=".45"></circle><path d="M10 9v18M16 9v18M10 18h6M13 27v28M55 9v46M55 9c-6 5-6 15 0 18"></path>
-                </svg>
+                <img
+                    class="project-image"
+                    src="./assets/Smart_Vehicle_Service/00_project_showcase_1600x600.png"
+                    alt="Smart Vehicle Service Manager project screenshot"
+                    loading="lazy"
+                  >
                 <div class="project-overlay">
                   <button class="project-action project-action-primary" type="button" data-project-details>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
                     View details
                   </button>
-                  <button class="project-action project-action-secondary" type="button" disabled title="GitHub link coming soon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7A11.5 11.5 0 0 0 8.36 23c.58.1.79-.25.79-.56v-2.23c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.58-.29-5.29-1.29-5.29-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.98 10.98 0 0 1 5.75 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.72 5.39-5.31 5.68.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"></path></svg>
-                    GitHub
-                  </button>
                 </div>
               </div>
               <div class="project-body">
-                <div class="project-meta"><p class="card-eyebrow">Management system</p><span>Web application</span></div>
-                <h3>Restaurant Management System</h3>
-                <p>A Flask-based application designed to support restaurant operations with a clear, practical workflow.</p>
-                <div class="tag-row"><span>Python</span><span>Flask</span><span>Database Design</span></div>
+                <div class="project-meta"><p class="card-eyebrow">Mobile App</p><span>Android application</span></div>
+                <h3>Smart Vehicle Service Manager Android Application</h3>
+                <p>Developed Smart Vehicle Service Manager, an offline-first Android application designed to help small vehicle service centers manage their daily garage operations efficiently.</p>
+                <div class="tag-row"><span>Kotlin</span><span>Android</span><span>Room Database</span><span>Firebase Auth</span><span>Firestore</span><span>CameraX</span><span>GPS</span></div>
               </div>
             </article>
 
@@ -563,28 +564,28 @@
               data-project-category="logic"
               data-project-github=""
               data-project-demo=""
-              data-project-description="A digital logic solution for managing airport parking availability using truth tables, Boolean expressions, logic gates, circuit design, and K-map simplification. The project demonstrates how a real process can be represented as a reliable combinational logic system."
+              data-project-description="FuelMonitor is an IoT-based fuel station monitoring system designed to track petrol and diesel fuel levels in real time. The system uses an ESP32 and IoT sensors to collect tank-level data and transmit it to a Firebase Realtime Database, allowing users to monitor fuel station operations through an interactive web dashboard.The dashboard provides real-time fuel percentages, tank volume calculations, vehicle fueling statistics, historical data visualization, fuel status monitoring, and CSV report exporting. Historical trends help users analyze fuel consumption and better understand station performance.This project combines embedded systems, IoT, cloud technology, database integration, and web development to create a practical smart fuel management solution.Technologies: ESP32, IoT Sensors, Firebase Realtime Database, Web Dashboard, Data Visualization, CSV Reporting."
+              data-project-images="./assets/Fule-Moniter/fule2.png,./assets/Fule-Moniter/fule3.png,./assets/Fule-Moniter/fule4.png,./assets/Fule-Moniter/fule5.png"
             >
               <div class="project-visual visual-parking">
-                <svg class="project-symbol" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
-                  <rect x="11" y="8" width="42" height="48" rx="5"></rect><path d="M25 47V18h10a10 10 0 0 1 0 20H25M25 27h10"></path>
-                </svg>
+                <img
+                    class="project-image"
+                    src="./assets/Fule-Moniter/Fule-1.png"
+                    alt="FuelMonitor project screenshot"
+                    loading="lazy"
+                  >
                 <div class="project-overlay">
                   <button class="project-action project-action-primary" type="button" data-project-details>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
                     View details
                   </button>
-                  <button class="project-action project-action-secondary" type="button" disabled title="GitHub link coming soon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .7A11.5 11.5 0 0 0 8.36 23c.58.1.79-.25.79-.56v-2.23c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.04 1.77 2.72 1.26 3.38.96.1-.75.4-1.26.74-1.55-2.58-.29-5.29-1.29-5.29-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.98 10.98 0 0 1 5.75 0c2.19-1.49 3.15-1.18 3.15-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.72 5.39-5.31 5.68.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"></path></svg>
-                    GitHub
-                  </button>
                 </div>
               </div>
               <div class="project-body">
-                <div class="project-meta"><p class="card-eyebrow">Digital logic</p><span>Circuit design</span></div>
-                <h3>Airport Parking Slot System</h3>
-                <p>A logic-gate solution created using truth tables, Boolean expressions, circuit design, and K-maps.</p>
-                <div class="tag-row"><span>Boolean Logic</span><span>Logic Gates</span><span>K-Maps</span></div>
+                <div class="project-meta"><p class="card-eyebrow">IoT Development</p><span>Real-time Monitoring</span></div>
+                <h3>FuelMonitor</h3>
+                <p>An IoT fuel-level monitoring system that reads tank levels in real time and pushes them to a connected dashboard, so refills stop being a guessing game.</p>
+                <div class="tag-row"><span>Arduino</span><span>ESP32</span><span>IoT Sensors</span><span>Firebase</span><span>ESP32</span><span>Real-Time Web</span><span>Data Visualization & Reporting</span></div>
               </div>
             </article>
           </div>
